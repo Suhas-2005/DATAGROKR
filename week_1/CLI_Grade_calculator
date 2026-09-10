@@ -1,0 +1,134 @@
+import csv
+
+def get_grade(marks):
+    if marks >= 90:
+        return "A"
+    elif marks >= 75:
+        return "B"
+    elif marks >= 60:
+        return "C"
+    elif marks >= 40:
+        return "D"
+    else:
+        return "F"
+
+def get_result(marks):
+    return "Pass" if marks >= 40 else "Fail"
+
+def calculate_average(marks):
+    return sum(marks) / len(marks)
+
+def save_students(students):
+    with open("students.csv", "w", newline="") as file:
+        writer = csv.writer(file)
+        writer.writerow(["Name", "Marks", "Grade", "Result"])
+
+        for name, marks in students.items():
+            writer.writerow([name, marks, get_grade(marks), get_result(marks)])
+
+def load_students():
+    students = {}
+
+    try:
+        with open("students.csv", "r") as file:
+            reader = csv.DictReader(file)
+
+            for row in reader:
+                students[row["Name"]] = int(row["Marks"])
+
+    except FileNotFoundError:
+        print("No student file found.")
+
+    except ValueError:
+        print("Invalid marks found in file.")
+
+    finally:
+        return students
+
+def display_students(students):
+    if not students:
+        print("No students available.")
+        return
+
+    for name, marks in students.items():
+        print(name, marks, get_grade(marks), get_result(marks))
+
+def display_statistics(students):
+    if not students:
+        print("No students available.")
+        return
+
+    marks = list(students.values())
+
+    print("Average:", calculate_average(marks))
+    print("Highest:", max(marks))
+    print("Lowest:", min(marks))
+    print("Total:", sum(marks))
+
+    passed = 0
+    failed = 0
+
+    for mark in marks:
+        if mark >= 40:
+            passed += 1
+        else:
+            failed += 1
+
+    print("Passed:", passed)
+    print("Failed:", failed)
+
+def search_student(students):
+    name = input("Enter student name: ").strip()
+
+    if name in students:
+        marks = students[name]
+        print(name, marks, get_grade(marks), get_result(marks))
+    else:
+        print("Student not found.")
+
+students = {}
+
+try:
+    n = int(input("Enter number of students: "))
+
+    for i in range(n):
+        name = input("Enter student name: ").strip()
+        marks = int(input("Enter marks: "))
+
+        if marks < 0 or marks > 100:
+            print("Invalid marks.")
+            continue
+
+        students[name] = marks
+
+    save_students(students)
+
+    while True:
+        print("\n1. Display Students")
+        print("2. Statistics")
+        print("3. Search Student")
+        print("4. Exit")
+
+        choice = input("Enter choice: ").strip()
+
+        if choice == "1":
+            display_students(students)
+
+        elif choice == "2":
+            display_statistics(students)
+
+        elif choice == "3":
+            search_student(students)
+
+        elif choice == "4":
+            print("Program ended.")
+            break
+
+        else:
+            print("Invalid choice.")
+
+except ValueError:
+    print("Please enter valid numbers.")
+
+finally:
+    print("Thank you.")
