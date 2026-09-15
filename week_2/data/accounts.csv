@@ -1,0 +1,12 @@
+account_number,account_holder,account_type,initial_balance
+ACC1001,Rahul Sharma,General Account,5000.00
+ACC1002,Priya Patel,Savings Account,10000.00
+ACC1003,Amit Singh,General Account,3000.00
+ACC1004,Sneha Reddy,Savings Account,7500.00
+ACC1005,Vikram Joshi,General Account,2000.00
+ACC1006,Anjali Gupta,Savings Account,15000.00
+ACC1007,Rohan Mehta,General Account,6000.00
+ACC1008,Kavita Nair,Savings Account,4000.00
+ACC1009,Suresh Kumar,General Account,8000.00
+ACC1010,Deepa Iyer,Savings Account,12000.00
+ACC1001,Suhas,Savings Account,20000.0
