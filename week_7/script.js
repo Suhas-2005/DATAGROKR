@@ -53,3 +53,12 @@ function updateTaskCounter() {
     document.getElementById("taskCounter").textContent =
         "Total tasks: " + count;
 }
+function clearAllTasks() {
+    const taskList = document.getElementById("taskList");
+    const message = document.getElementById("message");
+
+    taskList.innerHTML = "";
+    message.textContent = "";
+
+    updateTaskCounter();
+}
