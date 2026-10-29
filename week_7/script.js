@@ -3,6 +3,7 @@ function addTask() {
     const input = document.getElementById("taskInput");
     const taskText = input.value.trim();
     const message = document.getElementById("message");
+    const taskList = document.getElementById("taskList");
 
     if (taskText === "") {
         message.textContent = "Please enter a task!";
@@ -20,6 +21,7 @@ function addTask() {
 
     completeBtn.onclick = function () {
         li.classList.toggle("completed");
+
         completeBtn.textContent = li.classList.contains("completed")
             ? "Undo"
             : "Complete";
@@ -31,14 +33,23 @@ function addTask() {
 
     deleteBtn.onclick = function () {
         li.remove();
+        updateTaskCounter();
     };
 
     li.appendChild(span);
     li.appendChild(completeBtn);
     li.appendChild(deleteBtn);
 
-    document.getElementById("taskList").appendChild(li);
+    taskList.appendChild(li);
+
+    updateTaskCounter();
 
     input.value = "";
     input.focus();
+}
+
+function updateTaskCounter() {
+    const count = document.querySelectorAll("#taskList li").length;
+    document.getElementById("taskCounter").textContent =
+        "Total tasks: " + count;
 }
