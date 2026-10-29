@@ -62,3 +62,7 @@ function clearAllTasks() {
 
     updateTaskCounter();
 }
+
+function clearMessage() {
+    document.getElementById("message").textContent = "";
+}
